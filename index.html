@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coffee · Jigsaw Reading (IELTS style)</title>
+<style>
+:root{
+  --ink:#2A1C14; --muted:#6E5F55; --paper:#FBF7F1; --card:#FFFFFF; --line:#E6DACB;
+  --A:#4F8A3C; --A-l:#E7F2E1; --B:#6B3E26; --B-l:#F3E8E0; --AB:#C0392B; --AB-l:#FBE6E3;
+  --ok:#1E8A55; --ok-l:#E3F5EA; --bad:#C23B35; --bad-l:#FBE5E3;
+  --serif:Georgia,"Times New Roman",serif;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Tahoma,Arial,sans-serif;font-size:19px;line-height:1.6;color:var(--ink);background:var(--paper);
+  background-image:radial-gradient(rgba(107,62,38,.10) 2px,transparent 2.5px);background-size:34px 34px}
+button{font:inherit;cursor:pointer;color:inherit}
+header{background:linear-gradient(135deg,#2A1A10,#5A3420 65%,#7A4A2A);color:#fff;padding:20px 22px 0;position:relative;overflow:hidden}
+header h1{margin:0;font-family:var(--serif);font-size:30px;font-weight:700}
+header h1 .h{color:#F2C46D}
+header p{margin:2px 0 14px;opacity:.9;font-size:17px}
+.combs{position:absolute;right:14px;top:6px;font-size:58px;opacity:.25;letter-spacing:-8px}
+nav.tabs{display:flex;gap:6px;flex-wrap:wrap;max-width:1100px;margin:0 auto}
+nav.tabs button{border:0;border-radius:14px 14px 0 0;padding:10px 18px;font-weight:700;background:rgba(255,255,255,.14);color:#fff}
+nav.tabs button[aria-selected="true"]{background:var(--paper);color:var(--ink)}
+nav.tabs .dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;vertical-align:middle}
+main{max-width:1100px;margin:0 auto;padding:22px 18px 30px}
+.warn{border-radius:14px;padding:12px 16px;margin-bottom:16px;font-weight:600;display:flex;gap:10px;align-items:flex-start}
+.warn.A{background:var(--A-l);border:2px solid var(--A)}
+.warn.B{background:var(--B-l);border:2px solid var(--B)}
+.ar{direction:rtl;font-family:Tahoma,"Segoe UI",Arial,sans-serif;color:var(--B)}
+.grid{display:grid;grid-template-columns:1fr 290px;gap:20px;align-items:start}
+@media(max-width:860px){.grid{grid-template-columns:1fr}}
+article.text{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:24px 28px;-webkit-user-select:text;user-select:text}
+article.text.A{border-top:10px solid var(--A)}
+article.text.B{border-top:10px solid var(--B)}
+article.text h2{font-family:var(--serif);font-size:28px;margin:0 0 4px}
+.lab{display:inline-block;font-size:14px;font-weight:800;border-radius:99px;padding:2px 12px;margin-bottom:6px;color:#fff}
+.lab.A{background:var(--A)}.lab.B{background:var(--B)}.lab.AB{background:var(--AB)}
+#paras p{font-size:20px;line-height:1.8;margin:0 0 16px}
+aside.side{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:18px;position:sticky;top:12px}
+aside.side h3{margin:0 0 8px;font-size:19px}
+.hlbar{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 6px}
+.pen{width:40px;height:40px;border-radius:50%;border:3px solid transparent;box-shadow:inset 0 0 0 2px rgba(0,0,0,.12)}
+.pen[aria-pressed="true"]{border-color:var(--ink)}
+.pen.y{background:#FFE58A}.pen.g{background:#BDEBC6}.pen.p{background:#F9C6D8}
+.pen.er{background:#fff;font-size:18px}
+.hlnote{font-size:14px;color:var(--muted);margin:0 0 6px}
+.clearhl{background:none;border:0;text-decoration:underline;font-size:14px;padding:0;margin:0 0 16px;color:var(--muted)}
+mark.hl{border-radius:3px;padding:0 1px;color:inherit}
+mark.hl.y{background:#FFE58A}mark.hl.g{background:#BDEBC6}mark.hl.p{background:#F9C6D8}
+body.erase #paras mark.hl{cursor:pointer;outline:1px dashed var(--bad)}
+.words{list-style:none;margin:0 0 16px;padding:0;font-size:16px}
+.words li{display:flex;justify-content:space-between;gap:10px;border-bottom:1px dashed var(--line);padding:5px 0}
+.words b{color:var(--ink)}
+.btn{border:0;border-radius:12px;padding:12px 20px;font-weight:700;background:var(--B);color:#fff;box-shadow:0 3px 0 #2A1A10}
+.btn.amber{background:var(--A);color:#fff;box-shadow:0 3px 0 #2F5A22}
+.btn.ghost{background:#fff;border:2px solid var(--line);box-shadow:none;color:var(--ink)}
+.btn:active{transform:translateY(2px);box-shadow:none}
+.full{width:100%}
+.team{display:grid;grid-template-columns:1fr 1fr;gap:12px;background:#fff;border:2px solid var(--line);border-radius:16px;padding:16px;margin-bottom:18px}
+@media(max-width:620px){.team{grid-template-columns:1fr}}
+.team h3{grid-column:1/-1;margin:0;font-size:19px}
+.team label{display:block;font-weight:700;font-size:15px;margin-bottom:4px}
+.team input{width:100%;border:2px solid var(--line);border-radius:10px;padding:9px 12px;font-size:18px;background:#fff}
+.team .a input{border-color:var(--A)}.team .b input{border-color:var(--B)}
+.sec{background:#fff;border:2px solid var(--line);border-radius:18px;padding:20px 22px}
+.sec h2{font-family:var(--serif);margin:0 0 4px;font-size:26px}
+.inst{color:var(--muted);margin:0 0 12px}
+.q{border:2px solid var(--line);border-radius:14px;padding:14px 16px;margin:12px 0;background:#fff}
+.qh{display:flex;gap:10px;align-items:flex-start}
+.num{flex:none;width:34px;height:34px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px}
+.qt{font-weight:600;padding-top:3px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+@media(max-width:620px){.opts{grid-template-columns:1fr}}
+.opt{display:flex;gap:10px;align-items:center;text-align:left;border:2px solid var(--line);border-radius:12px;padding:9px 12px;background:#fff}
+.opt .lt{font-weight:800;color:var(--B);min-width:18px}
+.opt[aria-pressed="true"]{border-color:var(--B);background:var(--B-l)}
+.tfrow{display:flex;gap:8px;margin-top:10px}
+.tfrow .opt{flex:1;justify-content:center;font-weight:700;max-width:200px}
+.short{margin-top:10px;width:100%;max-width:420px;border:2px solid var(--line);border-radius:10px;padding:9px 12px;font-size:18px}
+.grp{background:var(--B-l);border-left:6px solid var(--B);border-radius:10px;padding:12px 16px;margin:22px 0 6px}
+.grp h3{margin:0 0 4px;font-size:19px}
+.grp p{margin:0;font-size:16px}
+.mlist{display:grid;grid-template-columns:repeat(3,1fr);gap:4px 16px;margin-top:8px;background:#fff;border:1px solid var(--line);border-radius:8px;padding:8px 12px;font-size:16px}
+@media(max-width:620px){.mlist{grid-template-columns:1fr 1fr}}
+.tfrow .opt{max-width:none}
+.mrow{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.mrow .opt{width:52px;justify-content:center;font-weight:800}
+.lim{font-size:13px;color:var(--muted);margin-left:8px}
+.fig{margin:6px 0 20px;text-align:center;-webkit-user-select:none;user-select:none}
+.fig svg{width:100%;max-width:600px;height:auto;display:block;margin:0 auto}
+.fig figcaption{font-size:15px;color:var(--muted);font-style:italic;margin-top:6px}
+.q.right{border-color:var(--ok);background:var(--ok-l)}
+.q.wrong{border-color:var(--bad);background:var(--bad-l)}
+.q.done .opt,.q.done .short{pointer-events:none}
+.opt.correct{border-color:var(--ok)!important;background:#fff!important;box-shadow:0 0 0 2px var(--ok) inset}
+.fb{margin-top:10px;font-size:16px}
+.src{display:inline-block;font-size:13px;font-weight:800;border-radius:99px;padding:1px 10px;color:#fff;margin-right:6px}
+.src.A{background:var(--A)}.src.B{background:var(--B)}.src.AB{background:var(--AB)}
+.row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+.res{background:#fff;border:2px solid var(--line);border-radius:18px;padding:22px}
+.big{font-size:60px;font-weight:900;font-family:var(--serif);line-height:1}
+.split{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:18px 0}
+@media(max-width:620px){.split{grid-template-columns:1fr}}
+.sp{border-radius:14px;padding:14px;text-align:center;font-weight:700}
+.sp b{display:block;font-size:30px;font-family:var(--serif)}
+.sp.A{background:var(--A-l);border:2px solid var(--A)}.sp.B{background:var(--B-l);border:2px solid var(--B)}.sp.AB{background:var(--AB-l);border:2px solid var(--AB)}
+.cert{margin-top:20px;border:10px double var(--B);border-radius:20px;padding:34px 26px;text-align:center;background:linear-gradient(#fff,#F6EEE4);position:relative}
+.cert h4{font-family:var(--serif);font-size:36px;margin:4px 0 8px;color:var(--B)}
+.cert .nm{font-family:var(--serif);font-size:32px;font-weight:700;margin:10px 0;border-bottom:2px solid var(--B);display:inline-block;padding:0 20px}
+.seal{position:absolute;right:22px;top:22px;width:92px;height:92px;border-radius:50%;background:var(--B);color:#fff;font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;text-align:center;line-height:1.2;transform:rotate(-10deg);box-shadow:0 0 0 5px #F2D9A8}
+@media(max-width:620px){.seal{display:none}}
+.empty{color:var(--muted);text-align:center;padding:30px}
+#toast{position:fixed;left:50%;bottom:22px;transform:translate(-50%,140%);background:var(--ink);color:#fff;padding:12px 20px;border-radius:14px;font-weight:600;transition:transform .3s;z-index:50;max-width:92vw;text-align:center}
+#toast.show{transform:translate(-50%,0)}
+canvas#cf{position:fixed;inset:0;pointer-events:none;z-index:40}
+footer{text-align:center;color:var(--muted);font-size:15px;padding:10px 0 30px}
+@media print{
+  header,nav,.noprint,footer,#toast,canvas{display:none!important}
+  body{background:#fff}
+  .res{border:0;padding:0}
+  .cert{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="combs">☕ ☕</div>
+  <h1>☕ Coffee: <span class="h">From Legend to Your Cup</span></h1>
+  <p>IELTS-style jigsaw reading for two · <span class="ar" style="color:#F2D9A8">قراءة تعاونية لطالبتين</span></p>
+  <nav class="tabs" role="tablist" id="tabs"></nav>
+</header>
+<main id="app"></main>
+<footer>Designed by: Nazila Motahari</footer>
+<div id="toast" role="status" aria-live="polite"></div>
+<canvas id="cf"></canvas>
+<script>
+const D={"title": "Coffee: From Legend to Your Cup", "A": {"title": "The Journey of Coffee", "paras": ["Coffee plants grow wild in the forests of Ethiopia. A popular story says that a goat herder called Kaldi discovered coffee there when he noticed that his goats became unusually lively after eating some red berries. However, the story was not written down until 1671, hundreds of years after Kaldi supposedly lived, so historians treat it as a legend rather than fact. What we call coffee \"beans\" are actually the seeds inside these red fruits, which are known as coffee cherries.", "The earliest reliable evidence of people drinking coffee comes from Yemen in the 15th century. Sufis drank it to stay awake during night prayers. Yemen also became the first place where coffee was grown as a crop, and its port of Mocha shipped so much coffee that its name is still used for a coffee drink today.", "From Arabia, coffee spread across the Ottoman Empire. Coffee houses opened in Istanbul in the mid-1500s, and by 1595 the city had more than 600 of them. They were busy places where people met to talk, play games and hear the latest news.", "Europe was slower to accept the drink. One of the first European coffee houses opened in Venice in 1645, and London's first opened in 1652. In London, coffee houses were nicknamed \"penny universities\", because for the price of a cup, customers could read newspapers and join discussions.", "Today, coffee is grown in more than 70 countries, but one country dominates: Brazil. It has been the world's largest producer since the 1840s and now grows about a third of the world's coffee."], "gloss": [["herder", "راعٍ"], ["berries", "ثمار / توت"], ["legend", "أسطورة"], ["seed", "بذرة"], ["reliable evidence", "دليل موثوق"], ["crop", "محصول زراعي"], ["port", "ميناء"], ["spread", "انتشر"], ["empire", "إمبراطورية"], ["nickname", "لقب"], ["discussion", "نقاش"], ["dominate", "يسيطر / يتصدّر"]], "bonus": ["Did you know? The English word \"coffee\" comes, through Italian, from the Arabic word qahwa.", "Bonus: Why do you think coffee houses became so popular in so many different countries? Discuss with your partner."], "figs": [{"after": 0, "svg": "<svg viewBox=\"0 0 560 230\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"A coffee cherry and the two seeds inside it\">\n<rect width=\"560\" height=\"230\" rx=\"16\" fill=\"#F7F1E8\"/>\n<path d=\"M120 40 q10 -25 35 -22\" stroke=\"#4F8A3C\" stroke-width=\"5\" fill=\"none\" stroke-linecap=\"round\"/>\n<path d=\"M150 22 q35 -10 45 18 q-35 8 -45 -18z\" fill=\"#6FA552\"/>\n<circle cx=\"120\" cy=\"120\" r=\"72\" fill=\"#C0392B\"/>\n<circle cx=\"95\" cy=\"95\" r=\"18\" fill=\"#E06A5C\" opacity=\".7\"/>\n<text x=\"120\" y=\"215\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"17\" font-weight=\"700\" fill=\"#2A1C14\">coffee cherry (the fruit)</text>\n<path d=\"M210 120 h70\" stroke=\"#6B3E26\" stroke-width=\"4\" marker-end=\"url(#ar1)\"/>\n<defs><marker id=\"ar1\" markerWidth=\"14\" markerHeight=\"14\" refX=\"8\" refY=\"7\" orient=\"auto\" markerUnits=\"userSpaceOnUse\"><path d=\"M0 0 L14 7 L0 14z\" fill=\"#6B3E26\"/></marker><marker id=\"unused\" markerWidth=\"1\" markerHeight=\"1\"><path d=\"M0 0 L10 5 L0 10z\" fill=\"#6B3E26\"/></marker></defs>\n<text x=\"245\" y=\"100\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"14\" fill=\"#6E5F55\">cut open</text>\n<circle cx=\"400\" cy=\"120\" r=\"78\" fill=\"#C0392B\"/>\n<circle cx=\"400\" cy=\"120\" r=\"64\" fill=\"#F2D9A8\"/>\n<ellipse cx=\"372\" cy=\"120\" rx=\"28\" ry=\"46\" fill=\"#C9B27A\" stroke=\"#8C7444\" stroke-width=\"3\"/>\n<ellipse cx=\"428\" cy=\"120\" rx=\"28\" ry=\"46\" fill=\"#C9B27A\" stroke=\"#8C7444\" stroke-width=\"3\"/>\n<path d=\"M372 82 q-8 38 0 76\" stroke=\"#8C7444\" stroke-width=\"3\" fill=\"none\"/>\n<path d=\"M428 82 q8 38 0 76\" stroke=\"#8C7444\" stroke-width=\"3\" fill=\"none\"/>\n<text x=\"400\" y=\"222\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"17\" font-weight=\"700\" fill=\"#2A1C14\">two seeds = coffee \"beans\"</text>\n</svg>", "cap": "Coffee \"beans\" are really the seeds of a red fruit."}, {"after": 3, "svg": "<svg viewBox=\"0 0 640 190\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Timeline of coffee's journey from Ethiopia to Brazil\">\n<rect width=\"640\" height=\"190\" rx=\"16\" fill=\"#F7F1E8\"/>\n<text x=\"20\" y=\"28\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"16\" font-weight=\"800\" fill=\"#6B3E26\">Coffee's journey</text>\n<path d=\"M60 100 H585\" stroke=\"#C9B27A\" stroke-width=\"6\" stroke-dasharray=\"2 12\" stroke-linecap=\"round\"/>\n<circle cx=\"64\" cy=\"100\" r=\"20\" fill=\"#4F8A3C\"/><text x=\"64\" y=\"106\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"17\" fill=\"#fff\">☕</text>\n<text x=\"64\" y=\"66\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"15\" font-weight=\"800\" fill=\"#2A1C14\">Ethiopia</text>\n<text x=\"64\" y=\"144\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#4F8A3C\">grows wild</text>\n<text x=\"64\" y=\"162\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12.5\" fill=\"#6E5F55\">Kaldi legend</text>\n<circle cx=\"191\" cy=\"100\" r=\"20\" fill=\"#6B3E26\"/><text x=\"191\" y=\"106\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"17\" fill=\"#fff\">☕</text>\n<text x=\"191\" y=\"66\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"15\" font-weight=\"800\" fill=\"#2A1C14\">Yemen</text>\n<text x=\"191\" y=\"144\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#6B3E26\">1400s</text>\n<text x=\"191\" y=\"162\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12.5\" fill=\"#6E5F55\">first farms</text>\n<circle cx=\"318\" cy=\"100\" r=\"20\" fill=\"#8E5A2E\"/><text x=\"318\" y=\"106\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"17\" fill=\"#fff\">☕</text>\n<text x=\"318\" y=\"66\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"15\" font-weight=\"800\" fill=\"#2A1C14\">Istanbul</text>\n<text x=\"318\" y=\"144\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#8E5A2E\">mid-1500s</text>\n<text x=\"318\" y=\"162\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12.5\" fill=\"#6E5F55\">600+ coffee houses</text>\n<circle cx=\"445\" cy=\"100\" r=\"20\" fill=\"#A8432F\"/><text x=\"445\" y=\"106\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"17\" fill=\"#fff\">☕</text>\n<text x=\"445\" y=\"66\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"15\" font-weight=\"800\" fill=\"#2A1C14\">Venice · London</text>\n<text x=\"445\" y=\"144\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#A8432F\">1645 · 1652</text>\n<text x=\"445\" y=\"162\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12.5\" fill=\"#6E5F55\">“penny universities”</text>\n<circle cx=\"572\" cy=\"100\" r=\"20\" fill=\"#C0392B\"/><text x=\"572\" y=\"106\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"17\" fill=\"#fff\">☕</text>\n<text x=\"572\" y=\"66\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"15\" font-weight=\"800\" fill=\"#2A1C14\">Brazil</text>\n<text x=\"572\" y=\"144\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#C0392B\">since 1840s</text>\n<text x=\"572\" y=\"162\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12.5\" fill=\"#6E5F55\">biggest producer</text>\n</svg>", "cap": "From the forests of Ethiopia to the farms of Brazil."}]}, "B": {"title": "Coffee, Your Body and Gahwa", "paras": ["Many people believe that coffee gives them energy, but this is not really true. During the day, a chemical called adenosine slowly builds up in the brain, and the more there is, the more tired we feel. Caffeine works by blocking adenosine, so the brain does not receive the \"I'm tired\" message.", "Caffeine acts quickly: its level in the blood reaches its highest point 30 to 60 minutes after drinking. However, it leaves the body slowly. In a typical adult, half of the caffeine is still there about five hours later, so an afternoon coffee can still affect sleep at night. This \"half-life\" varies greatly between people, from about two to ten hours.", "When the caffeine finally wears off, the adenosine that has been building up can suddenly reach the brain, which is why some people feel a \"crash\" of tiredness. Some people try a \"coffee nap\": they drink coffee and then immediately sleep for about 20 minutes, so that they wake up just as the caffeine starts to work.", "In the UAE, however, coffee is as much about hospitality as staying alert. Gahwa, the Emirati style of Arabic coffee, is made from lightly roasted coffee beans boiled with cardamom and often saffron. It is served without sugar in small cups called finjan. In 2015, Arabic coffee was added to UNESCO's list of the Intangible Cultural Heritage of Humanity, after a joint request by the UAE, Saudi Arabia, Oman and Qatar.", "Serving gahwa follows careful rules. Older people and the most important guests are served first, and the cup is only filled about a quarter full. Guests take the cup with the right hand, and when they have had enough, they gently shake it before handing it back."], "gloss": [["chemical", "مادة كيميائية"], ["build up", "يتراكم"], ["block", "يحجب / يمنع"], ["half-life", "عمر النصف"], ["vary", "يختلف"], ["wear off", "يزول تأثيره"], ["crash", "هبوط مفاجئ"], ["hospitality", "كرم الضيافة"], ["roasted", "محمَّص"], ["cardamom", "هيل"], ["saffron", "زعفران"], ["heritage", "تراث"]], "bonus": ["Did you know? In 2024, Jordan joined the UNESCO listing for Arabic coffee, together with the UAE, Saudi Arabia, Oman and Qatar.", "Bonus: Describe how gahwa is served in your family. Is it the same as in the text? Tell your partner."], "figs": [{"after": 0, "svg": "<svg viewBox=\"0 0 600 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Diagram: adenosine makes you tired; caffeine blocks it\">\n<rect width=\"600\" height=\"250\" rx=\"16\" fill=\"#F7F1E8\"/>\n<line x1=\"300\" y1=\"20\" x2=\"300\" y2=\"230\" stroke=\"#E0D2C0\" stroke-width=\"2\" stroke-dasharray=\"6 6\"/>\n<text x=\"150\" y=\"34\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"17\" font-weight=\"800\" fill=\"#2A1C14\">Without caffeine</text>\n<text x=\"450\" y=\"34\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"17\" font-weight=\"800\" fill=\"#2A1C14\">With caffeine</text>\n<g id=\"cell\">\n<rect x=\"40\" y=\"150\" width=\"220\" height=\"50\" rx=\"12\" fill=\"#E8D9F0\" stroke=\"#8E6BAA\" stroke-width=\"2\"/>\n<path d=\"M75 150 v-18 h30 v18 M135 150 v-18 h30 v18 M195 150 v-18 h30 v18\" fill=\"#F7F1E8\" stroke=\"#8E6BAA\" stroke-width=\"2\"/>\n<text x=\"150\" y=\"182\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"14\" fill=\"#5D3F78\">brain cell</text>\n</g>\n<circle cx=\"90\" cy=\"125\" r=\"13\" fill=\"#5A7FC2\"/><circle cx=\"150\" cy=\"125\" r=\"13\" fill=\"#5A7FC2\"/><circle cx=\"210\" cy=\"125\" r=\"13\" fill=\"#5A7FC2\"/>\n<circle cx=\"120\" cy=\"70\" r=\"13\" fill=\"#5A7FC2\"/><circle cx=\"180\" cy=\"80\" r=\"13\" fill=\"#5A7FC2\"/>\n<text x=\"150\" y=\"226\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"15\" font-weight=\"700\" fill=\"#5A7FC2\">Adenosine gets in → \"I'm tired\" 😴</text>\n<use href=\"#cell\" x=\"300\"/>\n<rect x=\"377\" y=\"113\" width=\"26\" height=\"26\" rx=\"4\" fill=\"#6B3E26\"/><rect x=\"437\" y=\"113\" width=\"26\" height=\"26\" rx=\"4\" fill=\"#6B3E26\"/><rect x=\"497\" y=\"113\" width=\"26\" height=\"26\" rx=\"4\" fill=\"#6B3E26\"/>\n<circle cx=\"400\" cy=\"70\" r=\"13\" fill=\"#5A7FC2\"/><circle cx=\"455\" cy=\"62\" r=\"13\" fill=\"#5A7FC2\"/><circle cx=\"510\" cy=\"74\" r=\"13\" fill=\"#5A7FC2\"/>\n<text x=\"450\" y=\"226\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"15\" font-weight=\"700\" fill=\"#6B3E26\">Caffeine blocks the way → alert 😀</text>\n<circle cx=\"250\" cy=\"52\" r=\"7\" fill=\"#5A7FC2\"/><text x=\"262\" y=\"57\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#2A1C14\">adenosine</text>\n<rect x=\"540\" y=\"45\" width=\"12\" height=\"12\" rx=\"2\" fill=\"#6B3E26\"/><text x=\"527\" y=\"57\" text-anchor=\"end\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#2A1C14\">caffeine</text>\n</svg>", "cap": "Caffeine does not add energy. It blocks the \"tired\" signal."}, {"after": 1, "svg": "<svg viewBox=\"0 0 600 260\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Graph: caffeine in the body falls to half after about five hours\">\n<rect width=\"600\" height=\"260\" rx=\"16\" fill=\"#F7F1E8\"/>\n<text x=\"20\" y=\"26\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"16\" font-weight=\"800\" fill=\"#6B3E26\">Caffeine left in the body (typical adult)</text>\n<line x1=\"70\" y1=\"200\" x2=\"560\" y2=\"200\" stroke=\"#6E5F55\" stroke-width=\"2\"/>\n<line x1=\"70\" y1=\"40\" x2=\"70\" y2=\"200\" stroke=\"#6E5F55\" stroke-width=\"2\"/>\n<text x=\"70\" y=\"220\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">0</text><text x=\"118\" y=\"220\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">1</text><text x=\"166\" y=\"220\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">2</text><text x=\"214\" y=\"220\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">3</text><text x=\"262\" y=\"220\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">4</text><text x=\"310\" y=\"220\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">5</text><text x=\"358\" y=\"220\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">6</text><text x=\"406\" y=\"220\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">7</text><text x=\"454\" y=\"220\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">8</text><text x=\"502\" y=\"220\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">9</text><text x=\"550\" y=\"220\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">10</text>\n<text x=\"315\" y=\"246\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"13\" fill=\"#6E5F55\">hours after drinking</text>\n<text x=\"62\" y=\"44\" text-anchor=\"end\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">100%</text>\n<text x=\"62\" y=\"124\" text-anchor=\"end\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">50%</text>\n<text x=\"62\" y=\"164\" text-anchor=\"end\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12\" fill=\"#6E5F55\">25%</text>\n<line x1=\"70\" y1=\"120\" x2=\"310\" y2=\"120\" stroke=\"#C0392B\" stroke-dasharray=\"5 5\"/><line x1=\"310\" y1=\"120\" x2=\"310\" y2=\"200\" stroke=\"#C0392B\" stroke-dasharray=\"5 5\"/>\n<polyline points=\"70.0,40.0 82.0,45.5 94.0,50.7 106.0,55.8 118.0,60.7 130.0,65.5 142.0,70.0 154.0,74.5 166.0,78.7 178.0,82.9 190.0,86.9 202.0,90.7 214.0,94.4 226.0,98.0 238.0,101.5 250.0,104.9 262.0,108.1 274.0,111.2 286.0,114.3 298.0,117.2 310.0,120.0 322.0,122.7 334.0,125.4 346.0,127.9 358.0,130.4 370.0,132.7 382.0,135.0 394.0,137.2 406.0,139.4 418.0,141.4 430.0,143.4 442.0,145.4 454.0,147.2 466.0,149.0 478.0,150.8 490.0,152.4 502.0,154.1 514.0,155.6 526.0,157.1 538.0,158.6 550.0,160.0\" fill=\"none\" stroke=\"#6B3E26\" stroke-width=\"4\"/>\n<circle cx=\"310\" cy=\"120\" r=\"7\" fill=\"#C0392B\"/>\n<text x=\"322\" y=\"112\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"14\" font-weight=\"700\" fill=\"#C0392B\">half is still there</text>\n<text x=\"404\" y=\"64\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"13\" fill=\"#2A1C14\">☕ 3 pm coffee →</text>\n<text x=\"404\" y=\"82\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"13\" fill=\"#2A1C14\">about half left at 8 pm</text>\n</svg>", "cap": "Caffeine works fast but leaves the body slowly."}, {"after": 3, "svg": "<svg viewBox=\"0 0 560 250\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"A dallah coffee pot, a small finjan cup filled a quarter full, and cardamom pods\">\n<rect width=\"560\" height=\"250\" rx=\"16\" fill=\"#F7F1E8\"/>\n<g fill=\"#D4A437\" stroke=\"#8C6A1F\" stroke-width=\"3\" stroke-linejoin=\"round\">\n<path d=\"M120 205 q-45 0 -40 -45 q5 -40 35 -55 l10 -20 h40 l10 20 q30 15 35 55 q5 45 -40 45z\"/>\n<path d=\"M125 85 q-5 -28 25 -40 q30 12 25 40z\"/>\n<path d=\"M150 45 v-14\"/><circle cx=\"150\" cy=\"26\" r=\"6\"/>\n<path d=\"M90 120 q-50 -10 -60 -55 q-2 -8 8 -6 q20 30 60 40\"/>\n<path d=\"M210 120 q35 -5 35 40 q0 25 -25 35\" fill=\"none\"/>\n<rect x=\"95\" y=\"205\" width=\"110\" height=\"10\" rx=\"4\"/>\n</g>\n<text x=\"150\" y=\"240\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"15\" font-weight=\"700\" fill=\"#2A1C14\">dallah (coffee pot)</text>\n<path d=\"M300 150 h90 l-12 55 h-66z\" fill=\"#fff\" stroke=\"#6B3E26\" stroke-width=\"3\"/>\n<path d=\"M312 191 h66 l-3 14 h-60z\" fill=\"#C9A15A\"/>\n<path d=\"M300 150 h90\" stroke=\"#C0392B\" stroke-width=\"4\"/>\n<text x=\"345\" y=\"240\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"15\" font-weight=\"700\" fill=\"#2A1C14\">finjan</text>\n<text x=\"402\" y=\"200\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"12.5\" fill=\"#6E5F55\">← only about ¼ full</text>\n<g fill=\"#7FB069\" stroke=\"#4F8A3C\" stroke-width=\"2\">\n<ellipse cx=\"460\" cy=\"110\" rx=\"12\" ry=\"20\" transform=\"rotate(-25 460 110)\"/><ellipse cx=\"492\" cy=\"104\" rx=\"12\" ry=\"20\" transform=\"rotate(15 492 104)\"/><ellipse cx=\"476\" cy=\"140\" rx=\"12\" ry=\"20\" transform=\"rotate(70 476 140)\"/>\n</g>\n<text x=\"478\" y=\"182\" text-anchor=\"middle\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"15\" font-weight=\"700\" fill=\"#2A1C14\">cardamom</text>\n<text x=\"20\" y=\"30\" font-family=\"Segoe UI,DejaVu Sans,Arial,sans-serif\" font-size=\"16\" font-weight=\"800\" fill=\"#6B3E26\">Gahwa</text>\n</svg>", "cap": "Gahwa is served from a dallah into a small finjan."}]}, "groups": [{"from": 1, "to": 7, "title": "Questions 1–7", "inst": "Do the following statements agree with the information in the texts? Choose TRUE if the statement agrees with the information, FALSE if the statement contradicts the information, or NOT GIVEN if there is no information on this."}, {"from": 8, "to": 12, "title": "Questions 8–12", "inst": "Complete the sentences. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer."}, {"from": 13, "to": 16, "title": "Questions 13–16", "inst": "Which place is each statement about? Choose the correct letter, A–F. NB You may use any letter more than once, and some letters are not used.", "list": [["A", "Ethiopia"], ["B", "Yemen"], ["C", "Istanbul"], ["D", "London"], ["E", "Brazil"], ["F", "the UAE"]]}, {"from": 17, "to": 20, "title": "Questions 17–20", "inst": "Choose the correct letter, A, B, C or D."}], "Q": [{"type": "tfng", "src": "A", "q": "Historians accept the story of Kaldi as a true account of how coffee was discovered.", "a": "FALSE", "why": "Historians treat it as a legend rather than fact (Text A, paragraph 1)."}, {"type": "tfng", "src": "B", "q": "Caffeine increases the amount of energy the body has.", "a": "FALSE", "why": "Text B says the idea that coffee gives energy is not really true; caffeine blocks the tiredness message (paragraph 1)."}, {"type": "tfng", "src": "A", "q": "No country grew coffee on farms before Yemen did.", "a": "TRUE", "why": "Yemen was the first place where coffee was grown as a crop (Text A, paragraph 2)."}, {"type": "tfng", "src": "B", "q": "Most people in the UAE prefer gahwa to other kinds of coffee.", "a": "NOT GIVEN", "why": "Text B describes gahwa but says nothing about what most people prefer."}, {"type": "tfng", "src": "A", "q": "The Ottoman authorities tried to close the coffee houses in Istanbul.", "a": "NOT GIVEN", "why": "Text A describes the coffee houses but does not mention any attempt to close them."}, {"type": "tfng", "src": "B", "q": "Everyone's body removes caffeine at roughly the same speed.", "a": "FALSE", "why": "The half-life varies greatly between people, from about two to ten hours (Text B, paragraph 2)."}, {"type": "tfng", "src": "A+B", "q": "The coffee used to make gahwa comes from the seeds of a fruit.", "a": "TRUE", "why": "Text B: gahwa is made from roasted coffee beans. Text A: coffee beans are actually the seeds of coffee cherries."}, {"type": "short", "src": "A", "q": "In Yemen, Sufis drank coffee so that they could stay awake during ______ .", "a": "night prayers", "accept": ["night prayers", "prayers", "night prayer"], "limit": 2, "why": "Text A, paragraph 2."}, {"type": "short", "src": "B", "q": "Caffeine stops the brain from getting the message that the body is ______ .", "a": "tired", "accept": ["tired"], "limit": 2, "why": "Text B, paragraph 1."}, {"type": "short", "src": "A", "q": "______ , a port in Yemen, gave its name to a modern coffee drink.", "a": "Mocha", "accept": ["mocha"], "limit": 2, "why": "Text A, paragraph 2."}, {"type": "short", "src": "B", "q": "A person taking a coffee nap sleeps for around ______ .", "a": "20 minutes", "accept": ["20 minutes", "twenty minutes", "20 mins", "20 min"], "limit": 2, "why": "Text B, paragraph 3. (\"20\" alone is not complete: the unit is needed.)"}, {"type": "short", "src": "A+B", "q": "UNESCO recognised Arabic coffee ______ years after London's first coffee house opened.", "a": "363", "accept": ["363", "363 years"], "limit": 2, "why": "Text B: UNESCO listed Arabic coffee in 2015. Text A: London's first coffee house opened in 1652. 2015 − 1652 = 363."}, {"type": "match", "src": "A", "q": "It grows roughly 33% of all the coffee in the world.", "a": "E", "why": "Brazil grows about a third of the world's coffee (Text A, paragraph 5)."}, {"type": "match", "src": "A", "q": "Its coffee houses gave people a cheap way to follow the news and take part in debates.", "a": "D", "why": "London's \"penny universities\" (Text A, paragraph 4). Istanbul's coffee houses had news too, but the cheap price is only mentioned for London."}, {"type": "match", "src": "B", "q": "Here, a guest moves her cup to show that she does not want any more.", "a": "F", "why": "Guests in the UAE gently shake the cup when they have had enough (Text B, paragraph 5)."}, {"type": "match", "src": "A", "q": "Coffee plants grow there naturally, without being planted by farmers.", "a": "A", "why": "Coffee plants grow wild in the forests of Ethiopia (Text A, paragraph 1)."}, {"type": "mc", "src": "B", "q": "Why might a cup of coffee at 4 pm affect a person's sleep?", "options": ["Caffeine needs about five hours before it starts to work.", "Coffee causes the brain to make more adenosine in the evening.", "Around half of the caffeine may still be in the body hours later.", "Afternoon coffee usually contains more caffeine than morning coffee."], "a": 2, "why": "Half of the caffeine is still there about five hours later (Text B, paragraph 2). Option A is a trap: caffeine works within 30–60 minutes."}, {"type": "mc", "src": "A+B", "q": "What is the most likely reason that Kaldi's goats became so lively?", "options": ["The berries gave their bodies extra energy.", "The bright red colour of the berries excited them.", "They had slept for a long time after eating the berries.", "A chemical in the berries stopped them feeling tired."], "a": 3, "why": "Text A: the goats became lively after eating coffee berries. Text B: caffeine blocks the tiredness message. Option A is a trap, because Text B says coffee does not really give energy."}, {"type": "mc", "src": "A+B", "q": "Which statement is supported by information in BOTH texts?", "options": ["People have used coffee to fight tiredness for over 500 years.", "Coffee was first drunk in Europe as a kind of medicine for the sick.", "Arabic coffee is usually served with a large amount of sugar.", "Most of the coffee that people drink in the UAE comes from Brazil."], "a": 0, "why": "Text A: 15th-century Sufis drank coffee to stay awake. Text B: caffeine blocks tiredness and people use it to stay alert."}, {"type": "mc", "src": "B", "q": "What is the main purpose of the paragraphs about gahwa?", "options": ["To explain step by step how to make gahwa at home", "To show that coffee also has an important social role", "To compare Emirati gahwa with Turkish and Italian coffee", "To warn readers about drinking too much coffee at night"], "a": 1, "why": "The paragraphs show that, in the UAE, coffee is about hospitality and follows social rules (Text B, paragraphs 4–5)."}], "sources": [["The Kaldi legend and Sufi origins in Yemen (Chowhound)", "https://chowhound.com/1523840/mythology-origin-first-cup-coffee-history"], ["Where coffee came from: Ethiopia, Yemen and Mocha (Seattle Coffee Gear)", "https://www.seattlecoffeegear.com/blogs/learning-center/history-of-coffee-ethiopia-to-the-world"], ["A short history of the coffee shop: Istanbul 600+ by 1595, London 1652, penny universities (World Coffee Portal, Prof. Jonathan Morris)", "https://www.worldcoffeeportal.com/Latest/InsightAnalysis/2019/Extract-A-short-history-of-the-coffee-shop"], ["Venice 1645 and London coffee houses (Tastes of History)", "https://www.tastesofhistory.co.uk/post/a-brief-history-of-foods-coffee"], ["Brazil a third of world coffee; beans are seeds of the cherry (Al Jazeera)", "https://www.aljazeera.com/news/2023/10/1/international-coffee-day-where-does-your-caffeine-fix-come-from"], ["Coffee production in Brazil (Wikipedia)", "https://Www.wikipedia.org/wiki/Coffee_production_in_Brazil"], ["Caffeine half-life and adenosine (Acibadem)", "https://acibademinternational.com/blog/caffeine-half-life-why-a-3-pm-coffee-is-still-in-your-blood-at-midnight/"], ["The coffee nap (Talk About Coffee)", "https://www.talkaboutcoffee.com/coffee-nap.html"], ["Gahwa (Abu Dhabi Department of Culture and Tourism)", "https://abudhabiculture.ae/en/unesco/intangible-cultural-heritage/gahwa"], ["Arabic coffee, a symbol of generosity (UNESCO decision)", "https://ich.unesco.org/en/Decisions/19.COM/7.b.55"], ["Coffee and the Arabic word qahwa (Brewminate)", "https://brewminate.com/?p=78797"]]};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const LET="ABCD";
+const S={tab:"A",nA:"",nB:"",ans:{},checked:false,pen:"y",hl:{A:null,B:null}};
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),2800)}
+const T=[["A","Student A","#8FCB74"],["B","Student B","#E0B48F"],["Q","Questions","var(--AB)"],["R","My result","#fff"]];
+
+function tabs(){
+  $("#tabs").innerHTML=T.map(([k,l,c])=>`<button role="tab" aria-selected="${S.tab===k}" data-tab="${k}"><span class="dot" style="background:${c}"></span>${l}</button>`).join("");
+  document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{saveHL();S.tab=b.dataset.tab;render();window.scrollTo({top:0})});
+}
+
+/* ---------- text tabs ---------- */
+function textTab(r){
+  const P=D[r],other=r==="A"?"B":"A";
+  return `<div class="warn ${r}">⚠️ <div>This is <b>Student ${r}'s</b> text. Student ${other}: please don't read this tab! Your partner will tell you about it.
+     <div class="ar">هذا نص الطالبة ${r==="A"?"أ":"ب"}. الطالبة ${r==="A"?"ب":"أ"}: لا تقرئي هذه الصفحة!</div></div></div>
+  <div class="grid">
+   <article class="text ${r}"><span class="lab ${r}">TEXT ${r}</span><h2>${esc(P.title)}</h2>
+    <div id="paras">${S.hl[r]||P.paras.map((p,k)=>`<p>${esc(p)}</p>`+(P.figs||[]).filter(f=>f.after===k).map(f=>`<figure class="fig" contenteditable="false">${f.svg}<figcaption>${esc(f.cap)}</figcaption></figure>`).join("")).join("")}</div>
+   </article>
+   <aside class="side"><h3>🖍️ Highlighter</h3>
+    <div class="hlbar" role="group" aria-label="Highlighter">${[["y","Yellow"],["g","Green"],["p","Pink"]].map(([k,l])=>`<button class="pen ${k}" data-pen="${k}" aria-pressed="${S.pen===k}" aria-label="${l} highlighter" title="${l}"></button>`).join("")}<button class="pen er" data-pen="er" aria-pressed="${S.pen==="er"}" aria-label="Eraser" title="Eraser: tap a highlight to remove it">⌫</button></div>
+    <p class="hlnote">Choose a colour, then select words in the text. Use ⌫ and tap a highlight to remove it.</p>
+    <button class="clearhl" id="clr">Clear all my highlights</button>
+    <h3>📖 Word help</h3>
+    <ul class="words">${P.gloss.map(([w,a])=>`<li><b>${esc(w)}</b><span class="ar">${esc(a)}</span></li>`).join("")}</ul>
+    <button class="btn full" id="toQ">Go to the questions →</button>
+   </aside>
+  </div>`;
+}
+function bindText(r){
+  const box=$("#paras");
+  document.body.classList.toggle("erase",S.pen==="er");
+  document.querySelectorAll("[data-pen]").forEach(b=>b.onclick=()=>{S.pen=b.dataset.pen;document.querySelectorAll("[data-pen]").forEach(x=>x.setAttribute("aria-pressed",x===b));document.body.classList.toggle("erase",S.pen==="er")});
+  $("#clr").onclick=()=>{box.querySelectorAll("mark.hl").forEach(unwrap);saveHL();toast("All highlights cleared")};
+  $("#toQ").onclick=()=>{saveHL();S.tab="Q";render();window.scrollTo({top:0})};
+  const doHL=()=>{
+    if(S.pen==="er")return;
+    const sel=getSelection();if(!sel.rangeCount||sel.isCollapsed)return;
+    const rg=sel.getRangeAt(0);if(!box.contains(rg.commonAncestorContainer))return;
+    if(rg.startContainer.nodeType===3){let o=rg.startOffset;const t=rg.startContainer.nodeValue;while(o>0&&/[A-Za-z0-9'’]/.test(t[o-1]))o--;rg.setStart(rg.startContainer,o)}
+    if(rg.endContainer.nodeType===3){let o=rg.endOffset;const t=rg.endContainer.nodeValue;while(o<t.length&&/[A-Za-z0-9'’]/.test(t[o]))o++;rg.setEnd(rg.endContainer,o)}
+    const pOf=n=>(n.nodeType===3?n.parentNode:n).closest("p");
+    const p1=pOf(rg.startContainer),p2=pOf(rg.endContainer);
+    if(!p1||p1!==p2){sel.removeAllRanges();return toast("Please highlight inside one paragraph at a time.")}
+    if(!rg.toString().trim()){sel.removeAllRanges();return}
+    const m=document.createElement("mark");m.className="hl "+S.pen;
+    m.appendChild(rg.extractContents());
+    m.querySelectorAll("mark.hl").forEach(unwrap);
+    rg.insertNode(m);sel.removeAllRanges();box.normalize();saveHL();
+  };
+  box.addEventListener("mouseup",()=>setTimeout(doHL,0));
+  box.addEventListener("touchend",()=>setTimeout(doHL,300));
+  box.addEventListener("click",e=>{const m=e.target.closest("mark.hl");if(S.pen==="er"&&m){unwrap(m);box.normalize();saveHL()}});
+}
+function unwrap(m){const p=m.parentNode;while(m.firstChild)p.insertBefore(m.firstChild,m);p.removeChild(m)}
+function saveHL(){const b=$("#paras");if(b&&(S.tab==="A"||S.tab==="B"))S.hl[S.tab]=b.innerHTML}
+
+/* ---------- questions ---------- */
+function teamBox(){return `<div class="team"><h3>👭 Our team</h3>
+  <div class="a"><label for="nA">Student A's name</label><input type="text" id="nA" value="${esc(S.nA)}" autocomplete="off" placeholder="Type a name"></div>
+  <div class="b"><label for="nB">Student B's name</label><input type="text" id="nB" value="${esc(S.nB)}" autocomplete="off" placeholder="Type a name"></div></div>`}
+function srcTag(s){const k=s==="A+B"?"AB":s;return `<span class="src ${k}">${s==="A+B"?"Both texts":"Text "+s}</span>`}
+function G(i){return D.groups.find(g=>i+1>=g.from&&i+1<=g.to)}
+function questionsTab(){
+  return teamBox()+`<section class="sec"><span class="lab AB">WORK WITH YOUR PARTNER</span><h2>Coffee questions · IELTS style</h2>
+   <p class="inst">Answer all 20 questions together, just like an IELTS Reading test. Some answers are in your text, some are in your partner's text, and some need <b>both</b> texts. Watch out: the questions use <b>different words</b> from the texts (paraphrase). Talk to each other, but don't show your screen! <span class="ar">أجيبا معاً، ولا تُريا الشاشة لبعضكما!</span></p>
+   ${D.Q.map((q,i)=>{
+     const a=S.ans[i];let body="";
+     if(q.type==="tfng")body=`<div class="tfrow">${["TRUE","FALSE","NOT GIVEN"].map(v=>`<button class="opt" data-q="${i}" data-v="${v}" aria-pressed="${a===v}">${v}</button>`).join("")}</div>`;
+     if(q.type==="match")body=`<div class="mrow">${G(i).list.map(([L,n])=>`<button class="opt" data-q="${i}" data-v="${L}" aria-pressed="${a===L}" title="${esc(n)}">${L}</button>`).join("")}</div>`;
+     if(q.type==="mc")body=`<div class="opts">${q.options.map((o,j)=>`<button class="opt" data-q="${i}" data-v="${j}" aria-pressed="${a===String(j)}"><span class="lt">${LET[j]}</span>${esc(o)}</button>`).join("")}</div>`;
+     if(q.type==="short")body=`<input class="short" data-q="${i}" value="${esc(a||"")}" autocomplete="off" placeholder="Type your answer"><span class="lim">max ${q.limit} words</span>`;
+     const g=D.groups.find(g=>g.from===i+1);
+     const head=g?`<div class="grp"><h3>${esc(g.title)}</h3><p>${esc(g.inst)}</p>${g.list?`<div class="mlist">${g.list.map(([L,n])=>`<div><b>${L}</b>&nbsp; ${esc(n)}</div>`).join("")}</div>`:""}</div>`:"";
+     return head+`<div class="q" id="q${i}"><div class="qh"><span class="num">${i+1}</span><div class="qt">${esc(q.q)}</div></div>${body}<div class="fb"></div></div>`;
+   }).join("")}
+   <div class="row noprint"><button class="btn" id="ck">✔ Check our answers</button>${S.checked?`<button class="btn ghost" id="again">↺ Try again</button>`:""}</div>
+  </section>`;
+}
+function norm(s){return String(s||"").trim().toLowerCase().replace(/[.!?"]/g,"").replace(/\s+/g," ")}
+function right(i){const q=D.Q[i],a=S.ans[i];if(a==null||a==="")return false;
+  if(q.type==="tfng"||q.type==="match")return a===q.a; if(q.type==="mc")return +a===q.a;
+  if(overLimit(i))return false;
+  return q.accept.includes(norm(a))}
+function overLimit(i){const q=D.Q[i];return q.type==="short"&&norm(S.ans[i]).split(" ").filter(Boolean).length>q.limit}
+function score(){const m={A:[0,0],B:[0,0],"A+B":[0,0]};D.Q.forEach((q,i)=>{m[q.src][1]++;if(right(i))m[q.src][0]++});const tot=D.Q.filter((q,i)=>right(i)).length;return {m,tot,max:D.Q.length}}
+function markAll(){
+  D.Q.forEach((q,i)=>{const c=$("#q"+i),ok=right(i);c.classList.add("done");c.classList.toggle("right",ok);c.classList.toggle("wrong",!ok);
+    if(q.type==="tfng"||q.type==="match")c.querySelector(`[data-v="${q.a}"]`).classList.add("correct");
+    if(q.type==="mc")c.querySelector(`[data-v="${q.a}"]`).classList.add("correct");
+    const ans=q.type==="mc"?`${LET[q.a]} (${q.options[q.a]})`:q.type==="match"?`${q.a} (${G(i).list.find(x=>x[0]===q.a)[1]})`:q.a;
+    const lim=overLimit(i)?" ⚠️ Too many words! In IELTS, an answer over the word limit is marked wrong.":"";
+    c.querySelector(".fb").innerHTML=`${srcTag(q.src)}${ok?"✅ <b>Correct!</b> ":`❌ <b>Answer:</b> ${esc(ans)}.${lim} `}${esc(q.why)}`;
+  });
+}
+function bindQ(){
+  const nA=$("#nA"),nB=$("#nB");
+  nA.oninput=()=>{S.nA=nA.value;const c=$("#cA");if(c)c.textContent=S.nA||"Student A"};
+  nB.oninput=()=>{S.nB=nB.value;const c=$("#cB");if(c)c.textContent=S.nB||"Student B"};
+  document.querySelectorAll(".opt[data-q]").forEach(b=>b.onclick=()=>{if(S.checked)return;const i=b.dataset.q;S.ans[i]=b.dataset.v;b.parentNode.querySelectorAll(".opt").forEach(x=>x.setAttribute("aria-pressed",x===b))});
+  document.querySelectorAll(".short").forEach(inp=>inp.oninput=()=>{S.ans[inp.dataset.q]=inp.value});
+  if(S.checked)markAll();
+  $("#ck").onclick=()=>{
+    if(S.checked){S.tab="R";render();return}
+    if(!S.nA.trim()||!S.nB.trim()){toast("Write both team names at the top first.");(!S.nA.trim()?nA:nB).focus();window.scrollTo({top:0,behavior:"smooth"});return}
+    const miss=D.Q.map((q,i)=>(S.ans[i]==null||String(S.ans[i]).trim()==="")?i+1:0).filter(Boolean);
+    if(miss.length){toast("Please answer every question. Missing: "+miss.join(", "));return}
+    S.checked=true;markAll();
+    $("#ck").textContent="See our result →";
+    const sc=score();toast(`You scored ${sc.tot} / ${sc.max}! Scroll to see the answers, or open My result.`);
+    if(sc.tot>=Math.ceil(sc.max*.8))confetti();
+  };
+  const ag=$("#again");if(ag)ag.onclick=()=>{S.ans={};S.checked=false;render();toast("Answers cleared. Try again together!")};
+}
+
+/* ---------- result ---------- */
+function resultTab(){
+  if(!S.checked)return `<div class="res empty">Answer the questions with your partner and press <b>Check our answers</b> first. ☕</div>`;
+  const m=score(),pass=m.tot>=Math.ceil(m.max*.8);
+  return `<div class="res"><div class="row" style="margin-top:0;align-items:center"><div class="big">${m.tot} / ${m.max}</div>
+   <div><b style="font-size:22px">${pass?"Fantastic teamwork! ☕":"Good effort! 🌱"}</b><br>${pass?"You shared your information well and helped each other.":"You need 16 / 20 for the team certificate. Go back to the Questions tab, look at the answers, then press Try again."}</div></div>
+   <div class="split">
+    <div class="sp A">Text A questions<b>${m.m.A[0]} / ${m.m.A[1]}</b></div>
+    <div class="sp B">Text B questions<b>${m.m.B[0]} / ${m.m.B[1]}</b></div>
+    <div class="sp AB">Both texts<b>${m.m["A+B"][0]} / ${m.m["A+B"][1]}</b></div>
+   </div>
+   <p class="inst">Tip: if one text has a low score, the answers in that text were not explained clearly enough. Read that text together now.</p>
+   ${pass?`<div class="noprint">${teamBox()}</div>
+   <div class="cert"><div class="seal">TEAM<br>READERS<br>☕</div><div style="font-size:42px">☕ 🌱 ☕</div><h4>Team Certificate</h4><div>This certifies that</div>
+    <div class="nm"><span id="cA">${esc(S.nA)||"Student A"}</span> &amp; <span id="cB">${esc(S.nB)||"Student B"}</span></div>
+    <div>worked together as a team to complete the IELTS-style jigsaw reading <i>Coffee: From Legend to Your Cup</i>,<br>sharing information and helping each other, with a score of <b>${m.tot} / ${m.max}</b>.</div>
+    <div style="margin-top:8px">${new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}</div>
+    <div style="margin-top:14px;font-family:var(--serif);font-style:italic">Designed by: Nazila Motahari · Higher Colleges of Technology</div></div>
+   <div class="row noprint"><button class="btn amber" id="pr">🖨️ Print / Save as PDF</button></div>`:""}
+  </div>`;
+}
+function bindR(){
+  const pr=$("#pr");if(pr)pr.onclick=()=>window.print();
+  const nA=$("#nA"),nB=$("#nB");
+  if(nA)nA.oninput=()=>{S.nA=nA.value;$("#cA").textContent=S.nA||"Student A"};
+  if(nB)nB.oninput=()=>{S.nB=nB.value;$("#cB").textContent=S.nB||"Student B"};
+  if(S.checked&&score().tot>=16)confetti();
+}
+
+function render(){
+  tabs();const A=$("#app");
+  if(S.tab==="A"||S.tab==="B"){A.innerHTML=textTab(S.tab);bindText(S.tab)}
+  else{document.body.classList.remove("erase");
+    if(S.tab==="Q"){A.innerHTML=questionsTab();bindQ()}
+    else{A.innerHTML=resultTab();bindR()}}
+}
+function confetti(){
+  const c=$("#cf"),x=c.getContext("2d");c.width=innerWidth;c.height=innerHeight;
+  const col=["#4F8A3C","#8FCB74","#6B3E26","#C0392B","#F2C46D"];
+  const P=Array.from({length:160},()=>({x:Math.random()*c.width,y:-Math.random()*c.height*.6,r:5+Math.random()*6,c:col[Math.random()*5|0],v:2+Math.random()*3,h:-1.5+Math.random()*3,a:Math.random()*6}));
+  let f=0;(function t(){x.clearRect(0,0,c.width,c.height);P.forEach(p=>{p.y+=p.v;p.x+=p.h;p.a+=.1;x.save();x.translate(p.x,p.y);x.rotate(p.a);x.fillStyle=p.c;x.fillRect(-p.r/2,-p.r/2,p.r,p.r*1.5);x.restore()});if(++f<220)requestAnimationFrame(t);else x.clearRect(0,0,c.width,c.height)})();
+}
+render();
+</script>
+</body>
+</html>
